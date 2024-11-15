@@ -74,10 +74,6 @@ export default function RegPage() {
 
   return (
     <div className="w-4/5 mx-auto flex flex-col items-center">
-      <Toaster
-      position="bottom-center"
-      reverseOrder={false}
-      />
       <div className="w-2/5 h-1/2 flex flex-col mt-4 mr-4 bg-black rounded-xl">
         <LoginSzuLogo />
         <h1 className="ml-10 text-4xl">注册</h1>

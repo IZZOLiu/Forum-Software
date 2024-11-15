@@ -52,8 +52,8 @@ export function Sample() {
   };
 
   return (
-    <ListboxWrapper>
       <Listbox
+        className="bg-primary-500"
         items={items}
         aria-label="用户操作"
         onAction={(key) => handleAction(key)}
@@ -68,14 +68,12 @@ export function Sample() {
           </ListboxItem>
         )}
       </Listbox>
-    </ListboxWrapper>
   );
 }
 
 export default function UserPop() {
   return (
     <div className="flex flex-col mx-auto w-full">
-      <Toaster position="bottom-center"/>
     <Popover showArrow placement="bottom">
       <PopoverTrigger>
         <User   
@@ -88,7 +86,7 @@ export default function UserPop() {
           }}
         />
       </PopoverTrigger>
-      <PopoverContent className="p-1">
+      <PopoverContent className="p-1 bg-primary-500">
         <Sample />
       </PopoverContent>
     </Popover>

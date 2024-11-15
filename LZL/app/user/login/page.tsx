@@ -4,7 +4,7 @@ import { LoginSzuLogo } from "@/components/icons";
 import { Button, Checkbox, Divider, Input, Link } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { User, initialUser } from "@/types/user"; 
 
 export default function LoginPage() {
@@ -66,7 +66,6 @@ export default function LoginPage() {
 
   return (
     <div className="w-4/5 mx-auto flex flex-col items-center">
-      <Toaster position="bottom-center" reverseOrder={false} />
       <div className="w-2/5 h-1/2 flex flex-col mt-4 mr-4 bg-black rounded-xl">
         <LoginSzuLogo />
         <h1 className="ml-10 text-4xl">登录</h1>

@@ -1,38 +1,26 @@
-'use client';
+"use client";
 import { Post } from "@/types/post";
 import {
   Card,
   CardBody,
   Checkbox,
   CheckboxGroup,
+  Chip,
   Divider,
   Image,
 } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from 'next/navigation';
+import { useParams } from "next/navigation";
 
-export function ContainerTemplate({ post }: { post: Post }) {
-  return (
-    <div className="w-full p-4 rounded-md mx-auto bg-gray-600">
-      <div className="flex items-center space-x-4">
-        <div className="flex-1 space-y-1">
-          <h2 className="text-2xl font-bold text-white">{post.author.name}</h2>
-          <Divider />
-          <p className="text-sm text-gray-400">{post.createdAt}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
+const tagMapping = {
+  eco: "金融",
+  bio: "生物",
+};
 
 export function Temp({ post }: { post: Post }) {
   return (
-    <Card
-      isBlurred
-      className="border-none bg-white/50 w-full"
-      shadow="sm"
-    >
+    <Card isBlurred className="border-none bg-gray-500/70 w-full" shadow="sm">
       <CardBody>
         <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 justify-center">
           <div className="relative col-span-6 md:col-span-4">
@@ -43,19 +31,26 @@ export function Temp({ post }: { post: Post }) {
                 height={200}
                 shadow="md"
                 src={post.imageUrl}
-                width="100%"
+                width={300}
               />
             </Link>
           </div>
-          <div className="relative col-span-6 md:col-span-4">
-            {/* 标题跳转 */}
+          <div className="relative col-span-6 md:col-span-8">
             <Link href={`/posts/${post.category}/${post.id}`}>
-              <p className="text-2xl mt-4 mb-4 text-blue-500 hover:underline cursor-pointer">
+              <p className="text-2xl mt-4 mb-4 text-primary hover:underline cursor-pointer">
                 {post.title}
               </p>
             </Link>
             <Divider />
-            <p className="text-xl mt-3">{post.description}</p>
+            <div className="mt-4 space-x-2">
+              {/* 遍历 tags 生成 Chip */}
+              {post.tags.map((tag) => (
+                <Chip key={tag} variant="flat" color="primary">
+                  {tagMapping[tag] || tag} {/* 显示中文或默认值 */}
+                </Chip>
+              ))}
+            </div>
+            <p className="text-sm mt-4 text-gray-300">{post.description}</p>
           </div>
         </div>
       </CardBody>
@@ -65,8 +60,8 @@ export function Temp({ post }: { post: Post }) {
 
 export function SideBarTemplate() {
   return (
-    <div className="w-full p-4 rounded-md mx-auto bg-gray-600 space-y-2 text-white">
-      <CheckboxGroup label="选择竞赛相关的领域">
+    <div className="w-full p-4 rounded-md mx-auto bg-gray-400 space-y-2 text-white">
+      <CheckboxGroup className="text-primary" label="选择竞赛相关的领域">
         <Divider />
         <Checkbox value="bio">生物</Checkbox>
         <Checkbox value="math">数学</Checkbox>
@@ -90,8 +85,8 @@ export default function ListTemplate() {
       .catch((error) => console.error("获取帖子数据时出错：", error));
   }, []);
 
-  const categoryPosts = posts.filter(post =>
-    params.category === 'all' ? true : post.category === params.category
+  const categoryPosts = posts.filter((post) =>
+    params.category === "all" ? true : post.category === params.category
   );
 
   return (
@@ -100,9 +95,8 @@ export default function ListTemplate() {
         <SideBarTemplate />
       </div>
       <div className="w-4/5 mt-10 flex flex-col items-center space-y-4">
-        {categoryPosts.map(post => (
+        {categoryPosts.map((post) => (
           <div key={post.id}>
-            <ContainerTemplate post={post} />
             <Temp post={post} />
           </div>
         ))}

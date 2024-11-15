@@ -11,7 +11,8 @@ import { Post } from "@/types/post";
 import React, { useEffect, useState } from "react";
 import { useParams, notFound } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
 function PostHeader({ post }: { post: Post }) {
   return (
     <div className="w-4/5 p-4 rounded-md mx-auto">
@@ -24,8 +25,8 @@ function PostHeader({ post }: { post: Post }) {
           height={150}
         />
         <div className="flex-1 space-y-1">
-          <h2 className="text-2xl font-bold text-white">{post.title}</h2>
-          <p className="text-sm text-gray-400">{post.content}</p>
+          <h2 className="text-2xl font-bold text-primary-700">{post.title}</h2>
+          <p className="text-md text-gray-400">{post.description}</p>
         </div>
       </div>
       <Divider className="mt-4" />
@@ -35,13 +36,15 @@ function PostHeader({ post }: { post: Post }) {
 
 export function PostBody({ post }: { post: Post }) {
   return (
-    <div className="w-3/4 flex flex-row items-center space-x-4">
+    <div className="w-3/4 flex flex-row items-start space-x-4">
       <div className="w-4/5 p-4 rounded-md mx-auto space-y-4">
         <div className="flex w-full flex-col">
           <Tabs aria-label="Options">
             <Tab key="content" title="介绍">
               <Card>
-                <CardBody>{post.content}
+                <CardBody className="text-primary-800">
+      <ReactMarkdown className="prose prose-zinc max-w-none" rehypePlugins={[rehypeHighlight]}>{post.content}</ReactMarkdown>
+
                   </CardBody>
               </Card>
             </Tab>
@@ -56,14 +59,14 @@ export function PostBody({ post }: { post: Post }) {
         </div>
         <div className="flex items-center space-x-4 rounded-md bg-gray-600"></div>
       </div>
-      <div className="w-1/5 p-4 rounded-md mx-auto bg-black">
+      <div className="w-1/5 p-4 rounded-md mt-10 mx-auto bg-gray-200">
         <div className="flex items-center space-x-4">
           <div className="flex-1 space-y-1">
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className="text-2xl font-bold text-primary">
               {post.author.name}
             </h2>
             <Divider />
-            <p className="text-sm text-gray-400">{post.createdAt}</p>
+            <p className="text-sm text-primary">{post.createdAt}</p>
           </div>
         </div>
       </div>
