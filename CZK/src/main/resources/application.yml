@@ -1,0 +1,59 @@
+server:
+  port: 5000
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: di0retsa.userlogin.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+mybatis-plus:
+  configuration:
+    # 关闭日志打印
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+    # 二级缓存
+    cache-enabled: true
+    # 延迟加载
+    lazy-loading-enabled: true
+  # 性能分析插件，开发环境可以开启，生产环境关闭
+  performance-interceptor-enabled: false
+
+szu:
+  forum:
+    jwt:
+      admin-secret-key: adminSK
+      admin-ttl: 7200000
+      admin-token-name: adminTN
+      admin-token-prefix: szuAdminToken
+      user-secret-key: userSK
+      user-ttl: 3600000
+      user-token-name: userTN
+      user-token-prefix: szuUserToken
+    encrypt:
+      cipher-instance: AES
+      secret-key: szuForumByGroup7
+
+
+spring:
+  application:
+    name: User_Login
+  datasource:
+    username: czk
+    password: 123456
+    url: jdbc:mysql://43.139.105.165:3306/szulab?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    servlet:
+      load-on-startup: 0
+    # Hikari 连接池配置
+    hikari:
+      # 最小空闲连接数
+      minimum-idle: 5
+      # 最大连接数
+      maximum-pool-size: 15
+      # 自动提交
+      auto-commit: true
+      # 连接超时时间
+      connection-timeout: 30000
+      # 连接测试查询
+      connection-test-query: SELECT 1
