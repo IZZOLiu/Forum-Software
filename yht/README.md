@@ -1,6 +1,6 @@
 # 数据库说明
 
-- ip地址：43.139.105.165，
+- ip地址：见群里
 
 - 端口：3306，
 
@@ -128,5 +128,17 @@ create table if not exists szulab.`post`
 -- 测试数据
 insert into szulab.`post` (`post_id`, `title`, `description`, `content`, `user_id`, `image_url`,`tags`) values (1, '蓝桥杯', '算法比赛', '蓝桥杯的测试数据', 1, 'http://172.31.233.204/resource/img/exp9/bg3.png', '比赛,蓝桥杯');
 insert into szulab.`post` (`post_id`, `title`, `description`, `content`, `user_id`, `image_url`,`tags`) values (2, 'ACM', '算法比赛', 'ACM的测试数据', 2, 'http://172.31.233.204/resource/img/exp9/bg2.png',  '比赛,ACM');
+```
+
+##### 修改帖子表
+
+```
+-- 更新表结构
+alter table post
+    add category varchar(256) null comment '帖子类型';
+-- 更新测试数据
+UPDATE szulab.post t SET t.category = 'competition' WHERE t.post_id = 2;
+UPDATE szulab.post t SET t.category = 'competition' WHERE t.post_id = 1;
+UPDATE szulab.post t SET t.category = 'team' WHERE t.post_id = 3;
 ```
 
