@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="di0retsa.userlogin.mapper.UserMapper">
+
+    <insert id="insert" parameterType="di0retsa.userlogin.entity.User" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO szulab.user (user_id, username, password, role, stu_id, create_time, update_time)
+        VALUES (#{userId}, #{username}, #{password}, #{role}, #{stuId}, #{createTime}, #{updateTime})
+    </insert>
+
+</mapper>
