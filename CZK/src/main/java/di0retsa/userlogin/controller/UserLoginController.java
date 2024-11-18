@@ -8,6 +8,7 @@ import di0retsa.userlogin.entity.vo.UserLoginVO;
 import di0retsa.userlogin.service.UserLoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,18 +24,12 @@ public class UserLoginController {
     private final UserLoginService userLoginService;
 
     @PostMapping("/register")
-    public String register(@RequestBody UserLoginDTO userLoginDTO) throws Throwable {
+    public ResponseEntity<String> register(@RequestBody UserLoginDTO userLoginDTO) throws Throwable {
         try{
             User user = userLoginService.userRegister(userLoginDTO);
             return Result.success();
-        } catch (IllegalPasswordException e){
-            return Result.error(IllegalPasswordException.errorCode, IllegalPasswordException.message);
-        } catch (IllegalStuIdException e){
-            return Result.error(IllegalStuIdException.errorCode, IllegalStuIdException.message);
-        } catch (ErrorPasswordException e){
-            return Result.error(ErrorPasswordException.errorCode, ErrorPasswordException.message);
-        } catch (UserExistException e){
-            return Result.error(UserExistException.errorCode, UserExistException.message);
+        } catch (BaseException e) {
+            return Result.error(e);
         }
     }
 
@@ -45,18 +40,12 @@ public class UserLoginController {
      * @throws Throwable
      */
     @PostMapping("/login")
-    public String login(@RequestBody UserLoginDTO userLoginDTO) throws Throwable {
+    public ResponseEntity<String> login(@RequestBody UserLoginDTO userLoginDTO) throws Throwable {
         try{
             UserLoginVO user = userLoginService.userLogin(userLoginDTO);
             return Result.success(user);
-        } catch (IllegalPasswordException e){
-            return Result.error(IllegalPasswordException.errorCode, IllegalPasswordException.message);
-        } catch (IllegalStuIdException e){
-            return Result.error(IllegalStuIdException.errorCode, IllegalStuIdException.message);
-        } catch (ErrorPasswordException e){
-            return Result.error(ErrorPasswordException.errorCode, ErrorPasswordException.message);
-        } catch (UserNonException e){
-            return Result.error(UserNonException.errorCode, UserNonException.message);
+        } catch (BaseException e) {
+            return Result.error(e);
         }
     }
 }

@@ -1,7 +1,5 @@
 package di0retsa.userlogin.entity;
 
-import lombok.Data;
-
 public enum StatusCode {
     SUCCESS(200),
     CLIENT_ERROR(400),
@@ -12,7 +10,9 @@ public enum StatusCode {
         this.statusCode = statusCode;
     }
 
-
+    public Integer getCode(){
+        return statusCode;
+    }
     @Override
     public String toString() {
         return String.valueOf(statusCode);

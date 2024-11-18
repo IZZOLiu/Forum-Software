@@ -1,7 +1,11 @@
 package di0retsa.userlogin.entity;
 
 import cn.hutool.json.JSONUtil;
+import di0retsa.userlogin.entity.exception.BaseException;
 import lombok.Data;
+import org.springframework.http.ResponseEntity;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 响应结果类
@@ -16,32 +20,38 @@ public class Result<T> {
     /**
      * 状态码
      */
-    private Integer statusCode;
+    private Integer status;
 
     /**
      * 相应实体
      */
     private T data;
 
-    public static <T> String success(){
+    public static <T> ResponseEntity<String> success(){
         Result<T> result = new Result<T>();
-        result.statusCode = Integer.parseInt(StatusCode.SUCCESS.toString());
+        result.status = Integer.parseInt(StatusCode.SUCCESS.toString());
         result.message = "操作成功";
-        return JSONUtil.toJsonStr(result);
+        return ResponseEntity
+                .ok()
+                .body(JSONUtil.toJsonStr(result));
     }
 
-    public static <T> String success(T object){
+    public static <T> ResponseEntity<String> success(T object){
 //        Result<T> result = new Result<T>();
 //        result.status = StatusCode.SUCCESS;
 //        result.message = "操作成功";
 //        result.data = object;
-        return JSONUtil.toJsonStr(object);
+        return ResponseEntity
+                .ok()
+                .body(JSONUtil.toJsonStr(object));
     }
 
-    public static <T> String error(StatusCode statusCode, String message){
+    public static <T> ResponseEntity<String> error(BaseException ex){
         Result<T> result = new Result<T>();
-        result.statusCode = Integer.parseInt(statusCode.toString());
-        result.message = message;
-        return JSONUtil.toJsonStr(result);
+        result.status = ex.getErrorCode().getCode();
+        result.message = ex.getMessage();
+        return ResponseEntity
+                .status(result.status)
+                .body(JSONUtil.toJsonStr(result));
     }
 }
