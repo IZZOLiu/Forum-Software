@@ -4,6 +4,9 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * 加密工具类配置信息
+ */
 @Data
 @Component
 @ConfigurationProperties(prefix = "szu.forum.encrypt")

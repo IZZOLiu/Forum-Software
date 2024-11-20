@@ -23,10 +23,15 @@ public class Result<T> {
     private Integer status;
 
     /**
-     * 相应实体
+     * 响应实体
      */
     private T data;
 
+    /**
+     * 成功响应 无返回结果
+     * @return
+     * @param <T>
+     */
     public static <T> ResponseEntity<String> success(){
         Result<T> result = new Result<T>();
         result.status = Integer.parseInt(StatusCode.SUCCESS.toString());
@@ -36,6 +41,12 @@ public class Result<T> {
                 .body(JSONUtil.toJsonStr(result));
     }
 
+    /**
+     * 成功响应 返回对应实体类的JSON串
+     * @param object 返回实体
+     * @return object.toJSONStr
+     * @param <T>
+     */
     public static <T> ResponseEntity<String> success(T object){
 //        Result<T> result = new Result<T>();
 //        result.status = StatusCode.SUCCESS;
@@ -46,6 +57,12 @@ public class Result<T> {
                 .body(JSONUtil.toJsonStr(object));
     }
 
+    /**
+     * 失败响应 返回对应的错误信息和错误码
+     * @param ex 自定义异常类
+     * @return
+     * @param <T>
+     */
     public static <T> ResponseEntity<String> error(BaseException ex){
         Result<T> result = new Result<T>();
         result.status = ex.getErrorCode().getCode();
