@@ -21,6 +21,7 @@ public final class EncryptUtil {
 
     /**
      * 加密/解密 隐私数据
+     *
      * @param text 文本 opMode 操作数，请用Cipher类定义的参数 加密 = 1； 解密 = 2
      * @return
      * @throws Throwable
@@ -28,7 +29,7 @@ public final class EncryptUtil {
     public String encrypt(byte[] text, int opMode) throws Throwable {
         String cipherInstance = encryptProperties.getCipherInstance();
         byte[] secretKey = encryptProperties.getSecretKey().getBytes(StandardCharsets.UTF_8);
-        if(secretKey.length != 16){
+        if (secretKey.length != 16) {
             throw new Throwable();
         }
         SecretKeySpec key = new SecretKeySpec(secretKey, "AES");

@@ -1,5 +1,8 @@
 package di0retsa.userlogin.entity;
 
+/**
+ * HTTP请求响应码
+ */
 public enum StatusCode {
     SUCCESS(200),
     CLIENT_ERROR(400),

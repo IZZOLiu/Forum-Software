@@ -18,15 +18,33 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * 用户登录服务实现类
+ */
 @Service
 @RequiredArgsConstructor
 public class UserLoginServiceImpl implements UserLoginService {
+    /**
+     * 加密工具类，用于加密密码
+     */
     private final EncryptUtil encryptUtil;
 
+    /**
+     * JWT Token工具类，用户生成Token
+     */
     private final JWTUtil jwtUtil;
 
+    /**
+     * 处理用户相关SQL
+     */
     private final UserMapper userMapper;
 
+    /**
+     * 参数合法性检验
+     * @param userLoginDTO
+     * @return
+     * @throws Throwable
+     */
     private static Boolean LegalTest(UserLoginDTO userLoginDTO) throws Throwable {
         // 非空检验
         if (userLoginDTO == null || StrUtil.isBlank(userLoginDTO.getStuId()) || StrUtil.isBlank(userLoginDTO.getPassword())) {
@@ -43,6 +61,12 @@ public class UserLoginServiceImpl implements UserLoginService {
         return Boolean.TRUE;
     }
 
+    /**
+     * 用户登录
+     * @param userLoginDTO
+     * @return
+     * @throws Throwable
+     */
     @Override
     public UserLoginVO userLogin(UserLoginDTO userLoginDTO) throws Throwable {
         LegalTest(userLoginDTO);
@@ -71,6 +95,12 @@ public class UserLoginServiceImpl implements UserLoginService {
                 .build();
     }
 
+    /**
+     * 用户注册
+     * @param userLoginDTO
+     * @return
+     * @throws Throwable
+     */
     @Override
     public User userRegister(UserLoginDTO userLoginDTO) throws Throwable {
         LegalTest(userLoginDTO);
@@ -90,4 +120,6 @@ public class UserLoginServiceImpl implements UserLoginService {
         userMapper.insert(newUser);
         return newUser;
     }
+
+    // TODO:修改密码重载
 }

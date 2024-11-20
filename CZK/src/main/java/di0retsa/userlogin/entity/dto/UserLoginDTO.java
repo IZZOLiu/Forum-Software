@@ -3,6 +3,9 @@ package di0retsa.userlogin.entity.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+/**
+ * 用户登录请求实体类
+ */
 @Data
 public class UserLoginDTO {
     @JsonProperty("stu_id")

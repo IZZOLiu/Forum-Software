@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+/**
+ * 用户登录系统Controller
+ */
 @RestController
 @Slf4j
 @RequestMapping("api/auth/")
@@ -23,6 +26,12 @@ public class UserLoginController {
 
     private final UserLoginService userLoginService;
 
+    /**
+     * 新用户注册
+     * @param userLoginDTO 用户注册信息
+     * @return
+     * @throws Throwable
+     */
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody UserLoginDTO userLoginDTO) throws Throwable {
         try{
@@ -35,7 +44,7 @@ public class UserLoginController {
 
     /**
      * 登录
-     * @param userLoginDTO 请求体
+     * @param userLoginDTO 用户注册信息
      * @return
      * @throws Throwable
      */

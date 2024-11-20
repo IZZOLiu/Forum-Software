@@ -4,6 +4,9 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * JWT Token工具类配置属性
+ */
 @Data
 @Component
 @ConfigurationProperties(prefix = "szu.forum.jwt")

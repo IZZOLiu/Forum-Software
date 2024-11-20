@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 用户登录请求返回实体类
+ */
 @Data
 @Builder
 @NoArgsConstructor

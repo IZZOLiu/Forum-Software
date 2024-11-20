@@ -5,6 +5,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * 用户登录服务启动类
+ */
 @SpringBootApplication
 @Slf4j
 @MapperScan("di0retsa.userlogin.mapper")

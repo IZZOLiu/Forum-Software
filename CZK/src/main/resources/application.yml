@@ -2,8 +2,11 @@ server:
   port: 5000
 
 mybatis:
+  # mapper路径
   mapper-locations: classpath:mapper/*.xml
+  # 别名路径
   type-aliases-package: di0retsa.userlogin.entity
+  # 开启驼峰映射
   configuration:
     map-underscore-to-camel-case: true
 
@@ -20,15 +23,19 @@ mybatis-plus:
 
 szu:
   forum:
+    # jwt配置信息
     jwt:
       admin-secret-key: adminSK
+      # 过期时间 默认2h
       admin-ttl: 7200000
       admin-token-name: adminTN
       admin-token-prefix: szuAdminToken
       user-secret-key: userSK
+      # 过期时间 默认1h
       user-ttl: 3600000
       user-token-name: userTN
       user-token-prefix: szuUserToken
+    # 加密配置信息
     encrypt:
       cipher-instance: AES
       secret-key: szuForumByGroup7
@@ -44,7 +51,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
     servlet:
-      load-on-startup: 0
+      load-on-startup: 1
     # Hikari 连接池配置
     hikari:
       # 最小空闲连接数
